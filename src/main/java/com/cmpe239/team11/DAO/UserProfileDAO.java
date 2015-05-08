@@ -2,6 +2,7 @@ package com.cmpe239.team11.DAO;
 
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import com.cmpe239.team11.Model.UserProfile;
 import com.cmpe239.team11.Utility.MongoConfig;
@@ -26,14 +27,26 @@ public class UserProfileDAO {
 		return user;
 	}
 	
-	public static boolean isExistingUser(UserProfile user){
+	public static boolean isExistingUser(String email){
 		Query query=new Query();
-		query.addCriteria(Criteria.where("email").in(user.getEmail()));
+		query.addCriteria(Criteria.where("email").in(email));
 		UserProfile userProfile=(UserProfile) MongoConfig.getMongoOperationsObj().find(query, UserProfile.class);
 		if(userProfile==null)
 			return false;
 		else
 			return true;
 		
+	}
+	
+	public static void updateuserProfile(UserProfile user){
+		Query query=new Query();
+		query.addCriteria(Criteria.where("email").in(user.getEmail()));
+		
+		Update update=new Update();
+		update.set("firstName", user.getFirstName());
+		update.set("lastName", user.getLastname());
+		update.set("birthDate", user.getBirthDate());
+		
+		MongoConfig.getMongoOperationsObj().findAndModify(query, update, UserProfile.class);
 	}
 }

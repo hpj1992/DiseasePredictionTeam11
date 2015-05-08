@@ -6,7 +6,22 @@ public class PatientData {
 	private String age;
 	private DNA dna;
 	private String menopause;
-	private String BMI;
+	private String bmi;
+	private String ageMenarche;
+	private String race;
+	
+	public String getAgeMenarche() {
+		return ageMenarche;
+	}
+	public void setAgeMenarche(String ageMenarche) {
+		this.ageMenarche = ageMenarche;
+	}
+	public String getRace() {
+		return race;
+	}
+	public void setRace(String race) {
+		this.race = race;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -32,10 +47,10 @@ public class PatientData {
 		this.menopause = menopause;
 	}
 	public String getBMI() {
-		return BMI;
+		return bmi;
 	}
 	public void setBMI(String bMI) {
-		BMI = bMI;
+		bmi = bMI;
 	}
 	
 }

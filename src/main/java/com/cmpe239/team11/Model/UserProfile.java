@@ -9,7 +9,7 @@ public class UserProfile {
 	@Id
 	private String email;
 	private String firstName;
-	private String lastname;
+	private String lastName;
 	private String password;
 	private String birthDate;
 	public String getFirstName() {
@@ -19,10 +19,10 @@ public class UserProfile {
 		this.firstName = firstName;
 	}
 	public String getLastname() {
-		return lastname;
+		return lastName;
 	}
 	public void setLastname(String lastname) {
-		this.lastname = lastname;
+		this.lastName = lastname;
 	}
 	public String getEmail() {
 		return email;
