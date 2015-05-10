@@ -1,9 +1,16 @@
 package com.cmpe239.team11.Model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="DNA")
 public class DNA {
 
-	public static int A;
-	public static int G;
-	public static int C;
-	public static int T;
+
+	public  String dnaSequence;
+	public  int A;
+	public  int G;
+	public  int C;
+	public  int T;
+	public  String geneType; // Normal gene or Affected gene
 }

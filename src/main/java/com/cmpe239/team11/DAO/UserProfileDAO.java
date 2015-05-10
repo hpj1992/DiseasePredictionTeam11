@@ -1,5 +1,7 @@
 package com.cmpe239.team11.DAO;
 
+import java.util.ArrayList;
+
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -30,11 +32,11 @@ public class UserProfileDAO {
 	public static boolean isExistingUser(String email){
 		Query query=new Query();
 		query.addCriteria(Criteria.where("email").in(email));
-		UserProfile userProfile=(UserProfile) MongoConfig.getMongoOperationsObj().find(query, UserProfile.class);
-		if(userProfile==null)
-			return false;
-		else
+		ArrayList<UserProfile> userProfileList=(ArrayList<UserProfile>) MongoConfig.getMongoOperationsObj().find(query, UserProfile.class);
+		if(userProfileList.size()>0)
 			return true;
+		else
+			return false;
 		
 	}
 	
