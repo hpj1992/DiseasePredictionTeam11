@@ -37,6 +37,8 @@ public class HomeController {
 	private static String mammography="";
 	private static String bmi="";
 	private static String username="";
+	private static boolean isAlchohol=false;
+	private static boolean isHormone=false;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -55,30 +57,7 @@ public class HomeController {
 		//DNAAverageDistanceDAO.generateAverageDistance(ApplicationConstants.NORMAL_GENE);
 		//getPredictionFromGene(req,model,"CCCCGCCCCCGCGACAGTCACCCGTTCCCCCGCCCCCGCGACAGTCGCCCGTTCCCCCGGCCCCGCGACA");
 		//GeneModel.uploadFileDataToServer();
-		/*
-		 * DNA dna=new DNA(); dna.dnaSequence="AGCTAGCTAGCT"; dna.A=10;
-		 * dna.G=40; dna.C=50; dna.T=60;
-		 * dna.geneType=ApplicationConstants.NORMAL_GENE;
-		 * MongoConfig.getMongoOperationsObj().save(dna);
-		 */
-
-		/*
-		 * try { ConfigurationBuilder cb = new ConfigurationBuilder();
-		 * cb.setDebugEnabled(true)
-		 * .setOAuthConsumerKey("Gb1lLnlcZld1NYPF61AmHvdW4")
-		 * .setOAuthConsumerSecret
-		 * ("7SXIQPS6xW3ihjZjNnI1axhAFYHnXF253A3AOjdho5u2ybbOAl")
-		 * .setOAuthAccessToken
-		 * ("2751880163-Yz9B1BBfvE4olNFZYyEpSYb8gFhdhJOJeX4ugZR")
-		 * .setOAuthAccessTokenSecret
-		 * ("F1qKJ1plEmCD16qvOLXvx0orGoN2QClG72HDxfCFWWZO9"); TwitterFactory tf
-		 * = new TwitterFactory(cb.build()); Twitter twitter = tf.getInstance();
-		 * Query query = new Query("#breastcancer"); QueryResult result; result
-		 * = twitter.search(query); for (Status status : result.getTweets()) {
-		 * System.out.println("@" + status.getUser().getScreenName() + ":" +
-		 * status.getText()); } } catch (TwitterException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 */
+		
 		return "home";
 	}
 
@@ -229,8 +208,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/getPredictionFromLifeStyle", method = RequestMethod.POST)
-	public String processPatientData(HttpServletRequest req, Model model,String age,String menopause,String ageMenarche,String height,String weight,String race) {
-
+	public String processPatientData(HttpServletRequest req, Model model,String age,String menopause,String ageMenarche,String height,String weight,String race,String alcohol,String hormone) {
 		if (!checkUserLoggedIn(req.getSession())) {
 			return "notLoggedIn";
 		} else {
@@ -242,9 +220,20 @@ public class HomeController {
 				patient.setBMI(bmi);
 				patient.setMenopause(menopause);
 				patient.setRace(race);
+				patient.setAlchoholConsumption(Boolean.valueOf(alcohol));
+				patient.setHormone(Boolean.valueOf(alcohol));
 				PatientDataManager.addPatientData(patient);
 				boolean isCancerPossilbe=PatientDataManager.processPatientData(patient);
 				System.out.println(isCancerPossilbe);
+				if(isCancerPossilbe){
+					PatientData curPatient=PatientDataManager.getPatientData(getLoggedInUser(req.getSession()));
+					if(curPatient.isAlchoholConsumption()){
+						isAlchohol=true;
+					}
+					if(curPatient.isHormone()){
+						isHormone=true;
+					}
+				}
 				setRecommendations(model);
 				return "dashboard";
 		}
