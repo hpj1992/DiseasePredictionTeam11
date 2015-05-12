@@ -9,7 +9,21 @@ public class PatientData {
 	private String bmi;
 	private String ageMenarche;
 	private String race;
+	private boolean alchoholConsumption=false;
+	private boolean hormone=false;
 	
+	public boolean isAlchoholConsumption() {
+		return alchoholConsumption;
+	}
+	public void setAlchoholConsumption(boolean alchoholConsumption) {
+		this.alchoholConsumption = alchoholConsumption;
+	}
+	public boolean isHormone() {
+		return hormone;
+	}
+	public void setHormone(boolean hormone) {
+		this.hormone = hormone;
+	}
 	public String getAgeMenarche() {
 		return ageMenarche;
 	}

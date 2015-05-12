@@ -39,7 +39,7 @@ public class PatientDataDAO {
 	public static boolean processPatientData(PatientData patient) {
 		rootFactors.clear();
 
-		if (Integer.valueOf(patient.getAge()) <= 39) {
+		if (Integer.valueOf(patient.getAge()) >=4) {
 			rootFactors.add("Age");
 			if (Integer.valueOf(patient.getAgeMenarche()) == 2) {
 				rootFactors.add("Age Menarche");
