@@ -26,4 +26,9 @@ public class PatientDataManager {
 	public static ArrayList<String> getRootFactors(){
 		return PatientDataDAO.getRootFactors();
 	}
+	
+	public static Double getPercent(){
+		return PatientDataDAO.getPercent();
+	}
+
 }

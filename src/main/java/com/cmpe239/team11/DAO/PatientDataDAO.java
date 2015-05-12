@@ -11,6 +11,8 @@ import com.cmpe239.team11.Utility.MongoConfig;
 
 public class PatientDataDAO {
 	public static ArrayList<String> rootFactors=new ArrayList<String>();
+	public static double percent=0.0;
+	
 	public static void addPatientData(PatientData patient){
 		MongoConfig.getMongoOperationsObj().save(patient);
 	}
@@ -18,7 +20,7 @@ public class PatientDataDAO {
 	public static PatientData getPatientData(String email){
 		Query query=new Query();
 		query.addCriteria(Criteria.where("email").in(email));
-		PatientData patientGot=(PatientData)MongoConfig.getMongoOperationsObj().find(query, PatientData.class);
+		PatientData patientGot=(PatientData)MongoConfig.getMongoOperationsObj().findOne(query, PatientData.class);
 		return patientGot;
 	}
 	
@@ -43,6 +45,7 @@ public class PatientDataDAO {
 			rootFactors.add("Age");
 			if (Integer.valueOf(patient.getAgeMenarche()) == 2) {
 				rootFactors.add("Age Menarche");
+				percent=45.0;
 				// 12-13
 				// YES
 			} else {
@@ -50,18 +53,22 @@ public class PatientDataDAO {
 				Integer temp2=temp.intValue();
 				if (temp2 == 2) {
 					rootFactors.add("BMI");
+					percent=28.0;
 					// YES
 				} else {
+					percent=0.0;
 					// NO
 				}
 			}
 		} else {
 			if(Integer.valueOf(patient.getMenopause())==2){
+				percent=83.0;
 				rootFactors.add("Menopause");
 				//YES
 			}
 			else{
 				if(Integer.valueOf(patient.getRace())==1){
+					percent=82.0;
 					rootFactors.add("Race");
 					//YES
 				}else{
@@ -78,6 +85,10 @@ public class PatientDataDAO {
 	
 	public static ArrayList<String> getRootFactors(){
 		return rootFactors;
+	}
+	
+	public static double getPercent(){
+		return percent;
 	}
 
 }
