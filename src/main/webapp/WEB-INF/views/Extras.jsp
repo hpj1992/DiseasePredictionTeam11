@@ -33,7 +33,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
                 <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">HealthCare</span><span style="display: none" class="logo-text-icon">Âµ</span></a></div>
+                <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">HealthCare</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
                 
                 <div class="news-update-box hidden-xs"><span class="text-uppercase mrm pull-left text-white">HealthCare</span>
@@ -197,7 +197,7 @@
                 <!--BEGIN FOOTER-->
                 <div id="footer">
                     <div class="copyright">
-                        <a href="http://themifycloud.com">2014 Â© KAdmin Responsive Multi-Purpose Template</a></div>
+                        <a href="http://themifycloud.com">2014 © KAdmin Responsive Multi-Purpose Template</a></div>
                 </div>
                 <!--END FOOTER-->
             </div>

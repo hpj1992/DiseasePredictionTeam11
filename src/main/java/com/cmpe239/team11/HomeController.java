@@ -37,8 +37,8 @@ public class HomeController {
 	private static String mammography="";
 	private static String bmi="";
 	private static String username="";
-	private static boolean isAlchohol=false;
-	private static boolean isHormone=false;
+	private static String isAlchohol="";
+	private static String isHormone="";
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -216,8 +216,7 @@ public class HomeController {
 				patient.setEmail("hpj1992@gmail.com");
 				patient.setAge(age);
 				patient.setAgeMenarche(ageMenarche);
-				bmi = Double.toString(LifestyleModel.getBMI(Double.valueOf(weight), Double.valueOf(height)));
-				patient.setBMI(bmi);
+				patient.setBMI(Double.toString(LifestyleModel.getBMI(Double.valueOf(weight), Double.valueOf(height))));
 				patient.setMenopause(menopause);
 				patient.setRace(race);
 				patient.setAlchoholConsumption(Boolean.valueOf(alcohol));
@@ -228,12 +227,19 @@ public class HomeController {
 				if(isCancerPossilbe){
 					PatientData curPatient=PatientDataManager.getPatientData(getLoggedInUser(req.getSession()));
 					if(curPatient.isAlchoholConsumption()){
-						isAlchohol=true;
+						isAlchohol="100";
+					}
+					else{
+						isAlchohol="0";
 					}
 					if(curPatient.isHormone()){
-						isHormone=true;
+						isHormone="100";
+					}
+					else{
+						isHormone="0";
 					}
 				}
+				bmi = Double.toString(LifestyleModel.idealBMI(Double.valueOf(weight), Double.valueOf(height)));
 				setRecommendations(model);
 				return "dashboard";
 		}
@@ -292,7 +298,7 @@ public class HomeController {
 		model.addAttribute("Mammography", mammography);
 		model.addAttribute("BMI", bmi);
 		model.addAttribute("username", username);
-		//model.addAttribute("Alcohol", alcohol);
-		//model.addAttribute("Hormone", hormone);
+		model.addAttribute("Alcohol", isAlchohol);
+		model.addAttribute("Hormone", isHormone);
 	}
 }
