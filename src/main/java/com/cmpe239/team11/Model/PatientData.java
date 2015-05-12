@@ -1,5 +1,8 @@
 package com.cmpe239.team11.Model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="patientData")
 public class PatientData {
 
 	private String email;
@@ -9,8 +12,8 @@ public class PatientData {
 	private String bmi;
 	private String ageMenarche;
 	private String race;
-	private boolean alchoholConsumption=false;
-	private boolean hormone=false;
+	private boolean alchoholConsumption;
+	private boolean hormone;
 	
 	public boolean isAlchoholConsumption() {
 		return alchoholConsumption;

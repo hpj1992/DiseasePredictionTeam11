@@ -213,6 +213,8 @@ public class HomeController {
 		if (!checkUserLoggedIn(req.getSession())) {
 			return "notLoggedIn";
 		} else {
+			
+				
 				PatientData patient=new PatientData();
 				patient.setEmail(getLoggedInUser(req.getSession()));
 				patient.setAge(age);
@@ -220,9 +222,22 @@ public class HomeController {
 				patient.setBMI(Double.toString(LifestyleModel.getBMI(Double.valueOf(weight), Double.valueOf(height))));
 				patient.setMenopause(menopause);
 				patient.setRace(race);
-				patient.setAlchoholConsumption(Boolean.valueOf(alcohol));
-				patient.setHormone(Boolean.valueOf(hormone));
+				String value1=req.getParameter("alcohol");
+				String value2=req.getParameter("hormone");
+				if(value1==null){
+					patient.setAlchoholConsumption(false);
+				}else{
+					patient.setAlchoholConsumption(true);
+				}
+				if(value2==null){
+					patient.setHormone(false);
+				}
+				else{
+					patient.setHormone(true);
+				}
 				PatientDataManager.addPatientData(patient);
+				System.out.println(patient.isAlchoholConsumption());
+				System.out.println(patient.isHormone());
 				boolean isCancerPossilbe=PatientDataManager.processPatientData(patient);
 				System.out.println(isCancerPossilbe);
 				if(isCancerPossilbe){

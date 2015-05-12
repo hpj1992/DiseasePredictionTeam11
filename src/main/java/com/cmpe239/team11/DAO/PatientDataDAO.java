@@ -14,6 +14,9 @@ public class PatientDataDAO {
 	public static double percent=0.0;
 	
 	public static void addPatientData(PatientData patient){
+		System.out.println("in dao");
+		System.out.println(patient.isAlchoholConsumption());
+		System.out.println(patient.isHormone());
 		MongoConfig.getMongoOperationsObj().save(patient);
 	}
 	
