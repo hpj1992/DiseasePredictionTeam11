@@ -12,6 +12,13 @@ public class UserProfile {
 	private String lastName;
 	private String password;
 	private String birthDate;
+	private String gender;
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

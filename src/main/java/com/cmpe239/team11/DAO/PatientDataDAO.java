@@ -46,7 +46,9 @@ public class PatientDataDAO {
 				// 12-13
 				// YES
 			} else {
-				if (Integer.valueOf(patient.getBMI()) == 2) {
+				Double temp=Double.valueOf(patient.getBMI());
+				Integer temp2=temp.intValue();
+				if (temp2 == 2) {
 					rootFactors.add("BMI");
 					// YES
 				} else {

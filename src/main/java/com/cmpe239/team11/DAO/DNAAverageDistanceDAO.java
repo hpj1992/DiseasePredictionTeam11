@@ -72,14 +72,14 @@ public class DNAAverageDistanceDAO {
 				.findOne(query2, DNAAverageDistances.class);
 		double distanceWithNormal=getDistance(normalDNADistances,dna);
 		double distanceWithAffected=getDistance(affectedDNADistances,dna);
-		double percent=0;
+		//double percent=0;
 		if(distanceWithAffected<distanceWithNormal){
-			percent=((distanceWithNormal-distanceWithAffected)/(distanceWithNormal+distanceWithAffected));
+			percent=1-((distanceWithAffected)/(distanceWithNormal+distanceWithAffected));
 			UpdateDNAAverageDistance(affectedDNADistances, dna);
 			return true;
 		}else{
 			// CANCER WONT HAPPEN
-			percent=((distanceWithAffected-distanceWithNormal)/(distanceWithNormal+distanceWithAffected));
+			percent=1-((distanceWithNormal)/(distanceWithNormal+distanceWithAffected));
 			UpdateDNAAverageDistance(normalDNADistances, dna);
 			return false;
 		}

@@ -9,22 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.mapping.model.AbstractPersistentProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import twitter4j.Query;
-import twitter4j.QueryResult;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
-
-import com.cmpe239.team11.DAO.DNAAverageDistanceDAO;
-import com.cmpe239.team11.DAO.DNADAO;
 import com.cmpe239.team11.Manager.DNAAverageDistanceManager;
 import com.cmpe239.team11.Manager.DNAManager;
 import com.cmpe239.team11.Manager.PatientDataManager;
@@ -33,9 +23,7 @@ import com.cmpe239.team11.Model.DNA;
 import com.cmpe239.team11.Model.PatientData;
 import com.cmpe239.team11.Model.UserProfile;
 import com.cmpe239.team11.Utility.ApplicationConstants;
-import com.cmpe239.team11.Utility.GeneModel;
 import com.cmpe239.team11.Utility.LifestyleModel;
-import com.cmpe239.team11.Utility.MongoConfig;
 
 /**
  * Handles requests for the application home page.
@@ -45,6 +33,10 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
+	
+	private static String mammography="";
+	private static String bmi="";
+	private static String username="";
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -90,11 +82,88 @@ public class HomeController {
 		return "home";
 	}
 
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	   public ModelAndView FirstPage()
+	   {
+	      ModelAndView mav = new ModelAndView("dashboard");
+	      return mav;
+	   }
+	@RequestMapping(value = "/Charts", method = RequestMethod.GET)
+	   public ModelAndView ChartPage()
+	   {
+	      ModelAndView mav = new ModelAndView("Charts");
+	      return mav;
+	   }
+	@RequestMapping(value = "/Tables", method = RequestMethod.GET)
+	   public ModelAndView TablePage()
+	   {
+	      ModelAndView mav = new ModelAndView("Tables");
+	      return mav;
+	   }
+	@RequestMapping(value = "/percent", method = RequestMethod.GET)
+	   public ModelAndView PercentPage()
+	   {
+	      ModelAndView mav = new ModelAndView("percent");
+	      return mav;
+	   }
+	
+	@RequestMapping(value = "/Login", method = RequestMethod.GET)
+	   public ModelAndView LoginPage()
+	   {
+	      ModelAndView mav = new ModelAndView("Login");
+	      return mav;
+	   }
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	   public ModelAndView RegisterPage()
+	   {
+	      ModelAndView mav = new ModelAndView("register");
+	      return mav;
+	   }
+	
+	@RequestMapping(value = "/lifestyle", method = RequestMethod.GET)
+	   public ModelAndView LifestylePage()
+	   {
+	      ModelAndView mav = new ModelAndView("lifestyle");
+	      return mav;
+	   }
+	
+	@RequestMapping(value = "/geneGraph", method = RequestMethod.GET)
+	   public ModelAndView GenePage()
+	   {
+	      ModelAndView mav = new ModelAndView("geneGraph");
+	      return mav;
+	   }
+	
+	@RequestMapping(value = "/Extras", method = RequestMethod.GET)
+	   public ModelAndView ProfilePage()
+	   {
+	      ModelAndView mav = new ModelAndView("Extras");
+	      return mav;
+	   }
+	
+	@RequestMapping(value = "/notLoggedIn", method = RequestMethod.GET)
+	   public ModelAndView notLoggedInPage()
+	   {
+	      ModelAndView mav = new ModelAndView("notLoggedIn");
+	      return mav;
+	   }
+	
+	@RequestMapping(value = "/existingUser", method = RequestMethod.GET)
+	   public ModelAndView existingUserPage()
+	   {
+	      ModelAndView mav = new ModelAndView("existingUser");
+	      return mav;
+	   }
+	
+	
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
-	public void signUp(HttpServletRequest req, Model model, String email,
-			String password, String firstName, String lastName, String birthDate) {
+	public String signUp(HttpServletRequest req, Model model, String email,
+	    String password, String confirmPassword, String firstName, String lastName, String birthDate, String gender) {
 		UserProfile user = new UserProfile();
+		System.out.println(password);
 		user.setEmail(email);
+		user.setGender(gender);
 		user.setFirstName(firstName);
 		user.setLastname(lastName);
 		user.setPassword(password);
@@ -102,12 +171,15 @@ public class HomeController {
 		if (UserProfileManager.isExistingUser(email)) {
 			// Existing user case.
 			System.out.println("Existing user");
+			return "existingUser";
 		} else {
 			UserProfileManager.AddNewUser(user);
 			HttpSession session = req.getSession();
 			session.setAttribute(ApplicationConstants.USER_ID_SESSION,
 					user.getEmail());
-			// redirect to dashboard logic comes here
+			username = user.getFirstName();
+			setRecommendations(model);
+			return "dashboard";
 		}
 	}
 
@@ -116,7 +188,7 @@ public class HomeController {
 			String firstName, String lastName,	String birthDate) {
 
 		if (!checkUserLoggedIn(req.getSession())) {
-			return "home";
+			return "notLoggedIn";
 		} else {
 			UserProfile user = new UserProfile();
 			user.setEmail(getLoggedInUser(req.getSession()));
@@ -124,13 +196,12 @@ public class HomeController {
 			user.setLastname(lastName);
 			user.setBirthDate(birthDate);
 			UserProfileManager.updateuserProfile(user);
+			return "dashboard";
 		}
-		return "";
-
 	}
 
 	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
-	public void signIn(HttpServletRequest req, Model model, String email,
+	public String signIn(HttpServletRequest req, Model model, String email,
 			String password) {
 		UserProfile user = UserProfileManager.GetAuthenticatedUser(email,
 				password);
@@ -139,41 +210,47 @@ public class HomeController {
 			HttpSession session = req.getSession();
 			session.setAttribute(ApplicationConstants.USER_ID_SESSION,
 					user.getEmail());
+			username = user.getFirstName();
+			setRecommendations(model);
+			return "dashboard";
 		} else {
 			if (UserProfileManager.isExistingUser(email)) {
 				// wrong password
+				return "Login";
 			} else {
 				// New user
+				return "notLoggedIn";
 			}
 		}
 	}
 
-	@RequestMapping(value = "/getPredictionFromLifeStyle")
+	@RequestMapping(value = "/getPredictionFromLifeStyle", method = RequestMethod.POST)
 	public String processPatientData(HttpServletRequest req, Model model,String age,String menopause,String ageMenarche,String height,String weight,String race) {
 
 		if (!checkUserLoggedIn(req.getSession())) {
-			return "home";
+			return "notLoggedIn";
 		} else {
 				PatientData patient=new PatientData();
 				patient.setEmail("hpj1992@gmail.com");
 				patient.setAge(age);
 				patient.setAgeMenarche(ageMenarche);
-				patient.setBMI(Double.toString(LifestyleModel.getBMI(Double.valueOf(weight), Double.valueOf(height))));
+				bmi = Double.toString(LifestyleModel.getBMI(Double.valueOf(weight), Double.valueOf(height)));
+				patient.setBMI(bmi);
 				patient.setMenopause(menopause);
 				patient.setRace(race);
 				PatientDataManager.addPatientData(patient);
 				boolean isCancerPossilbe=PatientDataManager.processPatientData(patient);
 				System.out.println(isCancerPossilbe);
-				
+				setRecommendations(model);
+				return "dashboard";
 		}
-		return "";
 	}
 
 	@RequestMapping(value = "/getPredictionFromGene")
 	public String getPredictionFromGene(HttpServletRequest req, Model model,
 			String sequence) {
 		if (!checkUserLoggedIn(req.getSession())) {
-			return "home";
+			return "notLoggedIn";
 		} else {
 			DNA dna = new DNA();
 			dna.dnaSequence = sequence;
@@ -181,16 +258,18 @@ public class HomeController {
 			boolean isCancerPossible = DNAAverageDistanceManager
 					.getDNAClusterAndUpdateDatabase(dna);
 			double percent = DNAAverageDistanceManager.getPercent();
+			mammography = Double.toString(percent);
 			if (isCancerPossible) {
 				dna.geneType = ApplicationConstants.AFFECTED_GENE;
 			} else {
 				dna.geneType = ApplicationConstants.NORMAL_GENE;
 			}
 			System.out.println(dna.geneType+ " "+isCancerPossible);
+			System.out.println(percent);
 			DNAManager.addNewData(dna);
-
+			setRecommendations(model);
+			return "dashboard";
 		}
-		return "";
 	}
 
 	// Session Management =============================================
@@ -213,5 +292,12 @@ public class HomeController {
 		} else
 			return "";
 	}
-
+	
+	public void setRecommendations(Model model){
+		model.addAttribute("Mammography", mammography);
+		model.addAttribute("BMI", bmi);
+		model.addAttribute("username", username);
+		//model.addAttribute("Alcohol", alcohol);
+		//model.addAttribute("Hormone", hormone);
+	}
 }
