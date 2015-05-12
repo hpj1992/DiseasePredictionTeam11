@@ -62,7 +62,7 @@
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
                      <div class="clearfix"></div>
-                    <li><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
+                    <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
                     
@@ -81,7 +81,7 @@
                     </i><span class="menu-title">OverAll Prediction</span></a>
                           
                     </li>
-                    <li class="active"><a href="Extras.html"><i class="fa fa-user fa-fw">
+                    <li><a href="Extras.html"><i class="fa fa-user fa-fw">
                         <div class="icon-bg bg-grey"></div>
                     </i><span class="menu-title">Edit Profile</span></a>
                       
@@ -137,7 +137,7 @@
                                 </ul>
                                 <div id="generalTabContent" class="tab-content">
                                     <div id="tab-edit" class="tab-pane fade in active">
-                                        <form action="saveUpdatedProfile" method="post" class="form-horizontal"><h3>Account Setting</h3>
+                                        <form action="saveUpdatedProfile" class="form-horizontal"><h3>Account Setting</h3>
 
                                             <div class="form-group"><label class="col-sm-3 control-label">Email</label>
 

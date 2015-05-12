@@ -62,11 +62,11 @@
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
                      <div class="clearfix"></div>
-                    <li><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
+                    <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
                     
-                    <li class="active"><a href="geneGraph.html"><i class="fa fa-edit fa-fw">
+                    <li><a href="geneGraph.html"><i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Gene Data Form</span></a>
                       
@@ -97,13 +97,13 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Gene Forms</div>
+                            Forms</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i
                             class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Gene Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Gene Forms</li>
+                        <li class="hidden"><a href="#">Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Forms</li>
                     </ol>
                     <div class="clearfix">
                     </div>
