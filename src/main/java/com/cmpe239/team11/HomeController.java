@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cmpe239.team11.DAO.DNAAverageDistanceDAO;
 import com.cmpe239.team11.Manager.DNAAverageDistanceManager;
 import com.cmpe239.team11.Manager.DNAManager;
 import com.cmpe239.team11.Manager.PatientDataManager;
@@ -213,14 +214,14 @@ public class HomeController {
 			return "notLoggedIn";
 		} else {
 				PatientData patient=new PatientData();
-				patient.setEmail("hpj1992@gmail.com");
+				patient.setEmail(getLoggedInUser(req.getSession()));
 				patient.setAge(age);
 				patient.setAgeMenarche(ageMenarche);
 				patient.setBMI(Double.toString(LifestyleModel.getBMI(Double.valueOf(weight), Double.valueOf(height))));
 				patient.setMenopause(menopause);
 				patient.setRace(race);
 				patient.setAlchoholConsumption(Boolean.valueOf(alcohol));
-				patient.setHormone(Boolean.valueOf(alcohol));
+				patient.setHormone(Boolean.valueOf(hormone));
 				PatientDataManager.addPatientData(patient);
 				boolean isCancerPossilbe=PatientDataManager.processPatientData(patient);
 				System.out.println(isCancerPossilbe);
@@ -239,9 +240,13 @@ public class HomeController {
 						isHormone="0";
 					}
 				}
+				double percent=PatientDataManager.getPercent();
+				System.out.println(percent);
 				bmi = Double.toString(LifestyleModel.idealBMI(Double.valueOf(weight), Double.valueOf(height)));
 				setRecommendations(model);
-				return "dashboard";
+				model.addAttribute("yesPercent", percent);
+				model.addAttribute("noPercent", (100 - percent));
+				return "percent";
 		}
 	}
 
@@ -268,7 +273,7 @@ public class HomeController {
 			DNAManager.addNewData(dna);
 			setRecommendations(model);
 			model.addAttribute("yesPercent", percent);
-			model.addAttribute("noPercent", (1 - percent));
+			model.addAttribute("noPercent", (100 - percent));
 			return "percent";
 		}
 	}

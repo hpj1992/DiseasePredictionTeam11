@@ -49,15 +49,13 @@ public class PatientDataDAO {
 				// 12-13
 				// YES
 			} else {
-				Double temp=Double.valueOf(patient.getBMI());
-				Integer temp2=temp.intValue();
-				if (temp2 == 2) {
+				Double bmi=Double.valueOf(patient.getBMI());
+				if(bmi >= 18.5 && bmi<=24.9){
 					rootFactors.add("BMI");
 					percent=28.0;
-					// YES
-				} else {
-					percent=0.0;
-					// NO
+				}
+				else 
+				{ 	percent=0.0;
 				}
 			}
 		} else {

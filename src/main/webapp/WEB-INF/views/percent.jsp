@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -183,6 +184,12 @@
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
+<c:set var="noPercent" value="${noPercent}"/>
+<c:set var="yesPercent" value="${yesPercent}" />
+<%
+double noPercent=(Double)(pageContext.getAttribute("noPercent"));
+double yesPercent=(Double)pageContext.getAttribute("yesPercent");
+%>
 <script>
 
 $(function () {
@@ -218,11 +225,11 @@ $(function () {
                
                 {
                     name: 'YES',
-                    y: "${yesPercent}",
+                    y: <%=yesPercent%>,
                     sliced: true,
                     selected: true
                 },
-                ['NO',    "${noPercent}"],
+                ['NO',    <%=noPercent%>],
                
             ]
         }]

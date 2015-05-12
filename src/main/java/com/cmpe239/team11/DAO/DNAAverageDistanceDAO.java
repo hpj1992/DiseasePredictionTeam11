@@ -20,7 +20,7 @@ public class DNAAverageDistanceDAO {
 		Query query=new Query();
 		query.addCriteria(Criteria.where("geneType").in(oldDistances.getGeneType()));
 		
-		long totalDocs=MongoConfig.getMongoOperationsObj().count(query, DNAAverageDistances.class);
+		long totalDocs=MongoConfig.getMongoOperationsObj().count(query, DNA.class);
 		
 		double newA=(oldDistances.getA()*totalDocs+newDNA.A)/(totalDocs+1);
 		double newG=(oldDistances.getG()*totalDocs+newDNA.G)/(totalDocs+1);
