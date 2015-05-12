@@ -52,7 +52,7 @@
                         <div class="col-md-9">
                             <div class="input-icon right">
                                 <i class="fa fa-lock"></i>
-                                <input id="password" name="password" type="text" placeholder="" class="form-control" /></div>
+                                <input id="password" name="password" type="password" placeholder="" class="form-control" /></div>
                         </div>
                     </div>
                     <div class="form-group mbn">

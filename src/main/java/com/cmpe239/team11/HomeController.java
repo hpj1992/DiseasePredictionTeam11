@@ -83,16 +83,17 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-	   public ModelAndView FirstPage()
+	   public String FirstPage(Model model)
 	   {
-	      ModelAndView mav = new ModelAndView("dashboard");
-	      return mav;
+	      model.addAttribute("username", username);	      
+	      return "dashboard";
 	   }
+	
 	@RequestMapping(value = "/Charts", method = RequestMethod.GET)
-	   public ModelAndView ChartPage()
+	   public String ChartPage(Model model)
 	   {
-	      ModelAndView mav = new ModelAndView("Charts");
-	      return mav;
+	      model.addAttribute("username", username);	      
+	      return "Charts";
 	   }
 	@RequestMapping(value = "/Tables", method = RequestMethod.GET)
 	   public ModelAndView TablePage()
@@ -257,7 +258,7 @@ public class HomeController {
 			dna = DNAManager.generateCount(dna);
 			boolean isCancerPossible = DNAAverageDistanceManager
 					.getDNAClusterAndUpdateDatabase(dna);
-			double percent = DNAAverageDistanceManager.getPercent();
+			double percent = DNAAverageDistanceManager.getPercent() * 100;
 			mammography = Double.toString(percent);
 			if (isCancerPossible) {
 				dna.geneType = ApplicationConstants.AFFECTED_GENE;
@@ -268,7 +269,9 @@ public class HomeController {
 			System.out.println(percent);
 			DNAManager.addNewData(dna);
 			setRecommendations(model);
-			return "dashboard";
+			model.addAttribute("yesPercent", percent);
+			model.addAttribute("noPercent", (1 - percent));
+			return "percent";
 		}
 	}
 
