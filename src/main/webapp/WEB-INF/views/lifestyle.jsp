@@ -234,7 +234,7 @@
                 <!--BEGIN FOOTER-->
                 <div id="footer">
                     <div class="copyright">
-                        2015 Â© Team 11</a></div>
+                        2015 © Team 11</a></div>
                 </div>
                 <!--END FOOTER-->
             </div>

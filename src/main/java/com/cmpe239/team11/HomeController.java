@@ -95,17 +95,19 @@ public class HomeController {
 	      model.addAttribute("username", username);	      
 	      return "Charts";
 	   }
+	
 	@RequestMapping(value = "/Tables", method = RequestMethod.GET)
-	   public ModelAndView TablePage()
+	   public String TablePage(Model model)
 	   {
-	      ModelAndView mav = new ModelAndView("Tables");
-	      return mav;
+	      model.addAttribute("username", username);	      
+	      return "Tables";
 	   }
+	
 	@RequestMapping(value = "/percent", method = RequestMethod.GET)
-	   public ModelAndView PercentPage()
+	   public String percentPage(Model model)
 	   {
-	      ModelAndView mav = new ModelAndView("percent");
-	      return mav;
+	      model.addAttribute("username", username);	      
+	      return "percent";
 	   }
 	
 	@RequestMapping(value = "/Login", method = RequestMethod.GET)
@@ -123,24 +125,24 @@ public class HomeController {
 	   }
 	
 	@RequestMapping(value = "/lifestyle", method = RequestMethod.GET)
-	   public ModelAndView LifestylePage()
+	   public String LifestylePage(Model model)
 	   {
-	      ModelAndView mav = new ModelAndView("lifestyle");
-	      return mav;
+	      model.addAttribute("username", username);	      
+	      return "lifestyle";
 	   }
 	
 	@RequestMapping(value = "/geneGraph", method = RequestMethod.GET)
-	   public ModelAndView GenePage()
+	   public String genePage(Model model)
 	   {
-	      ModelAndView mav = new ModelAndView("geneGraph");
-	      return mav;
+	      model.addAttribute("username", username);	      
+	      return "geneGraph";
 	   }
 	
 	@RequestMapping(value = "/Extras", method = RequestMethod.GET)
-	   public ModelAndView ProfilePage()
+	   public String ProfilePage(Model model)
 	   {
-	      ModelAndView mav = new ModelAndView("Extras");
-	      return mav;
+	      model.addAttribute("username", username);	      
+	      return "Extras";
 	   }
 	
 	@RequestMapping(value = "/notLoggedIn", method = RequestMethod.GET)
@@ -197,6 +199,7 @@ public class HomeController {
 			user.setLastname(lastName);
 			user.setBirthDate(birthDate);
 			UserProfileManager.updateuserProfile(user);
+			model.addAttribute("username", username);	  
 			return "dashboard";
 		}
 	}
