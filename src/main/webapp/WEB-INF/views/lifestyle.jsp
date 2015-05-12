@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Forms | Forms</title>
+    <title>Lifestyle Forms | Lifestyle Forms</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,7 +62,7 @@
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
                      <div class="clearfix"></div>
-                    <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
+                    <li><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
                     
@@ -71,7 +71,7 @@
                     </i><span class="menu-title">Gene Data Form</span></a>
                       
                     </li>
-                    <li><a href="lifestyle.html"><i class="fa fa-edit fa-fw">
+                    <li class="active"><a href="lifestyle.html"><i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Lifestyle Form</span></a>
                       
@@ -97,13 +97,13 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Forms</div>
+                            Lifestyle Form</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i
                             class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Forms</li>
+                        <li class="hidden"><a href="#">Lifestyle Form</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Lifestyle Form</li>
                     </ol>
                     <div class="clearfix">
                     </div>
@@ -131,8 +131,8 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <div class="form-group">
-                                                                  <select name="age" class="form-control">
-                                                                  <option>Age</option>
+                                                                  <select name="age" class="form-control" required>
+                                                                  <option selected disabled value="">Age</option>
                                                                   <option value="1">18 - 29</option>
                                                                   <option value="2">30 - 34</option>
                                                                   <option value="3">35 - 39</option>
@@ -152,8 +152,8 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                <div class="form-group">
-                                                                  <select name="menopause" class="form-control">
-                                                                  <option>Menopause</option>
+                                                                  <select name="menopause" class="form-control" required>
+                                                                  <option selected disabled value="">Menopause</option>
                                                                   <option value="1">Pre- or Peri-menopausal</option>
                                                                   <option value="2">Post-menopausal</option>
                                                                   <option value="3">Surgical menopause</option>
@@ -163,8 +163,8 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                <div class="form-group">
-                                                                  <select name="ageMenarche" class="form-control">
-                                                                  <option>Age Menarche</option>
+                                                                  <select name="ageMenarche" class="form-control" required>
+                                                                  <option selected disabled value="">Age Menarche</option>
                                                                   <option value="0">Age greater than equal to 14</option>
                                                                   <option value="1">Age between 12 - 13</option>
                                                                   <option value="2">Age less than 12</option>
@@ -174,8 +174,8 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                <div class="form-group">
-                                                                  <select name="race" class="form-control">
-                                                                  <option>Race</option>
+                                                                  <select name="race" class="form-control" required>
+                                                                  <option selected disabled value="">Race</option>
                                                                   <option value="1">Non-Hispanic white</option>
                                                                   <option value="2">Non-Hispanic black</option>
                                                                   <option value="3">Asian/Pacific Islander</option>
@@ -189,14 +189,14 @@
                                                     <div class="col-md-12">
                                                         <label for="inputHeight" class="control-label">
                                                             Height</label>
-                                                        <input id="inputHeight" name="height" type="text" placeholder="" class="form-control" />
+                                                        <input id="inputHeight" name="height" type="text" placeholder="in inches" class="form-control" required />
                                                     </div>
                                                     </div>
                                                     <div class="form-group">
                                                     <div class="col-md-12">
                                                         <label for="inputWeight" class="control-label">
                                                             Weight</label>
-                                                        <input id="inputWeight" name="weight" type="text" placeholder="" class="form-control" />
+                                                        <input id="inputWeight" name="weight" type="text" placeholder="in pounds" class="form-control" required />
                                                     </div>
                                                     </div>
                                                     <div><br /></div>

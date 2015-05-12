@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Forms | Forms</title>
+    <title>Charts | Charts</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,7 +62,7 @@
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
                      <div class="clearfix"></div>
-                    <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
+                    <li><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
                     
@@ -86,7 +86,7 @@
                     </i><span class="menu-title">Edit Profile</span></a>
                       
                     </li>
-                    <li><a href="Charts.html"><i class="fa fa-bar-chart-o fa-fw">
+                    <li class="active"><a href="Charts.html"><i class="fa fa-bar-chart-o fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Risk Factors Chart</span></a>
                 </ul>
@@ -97,13 +97,13 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Forms</div>
+                            Charts</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i
                             class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Forms</li>
+                        <li class="hidden"><a href="#">Charts</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Charts</li>
                     </ol>
                     <div class="clearfix">
                     </div>
@@ -129,7 +129,7 @@
                     <div class="col-lg-12">
                       
                             
-                                <iframe src="http://52.24.173.76:5601/#/dashboard/new-dashboard-with-unknown-values?embed&_a=(filters:!(),panels:!((col:10,id:menopause-vs-breast-cancer-history-pie-chart,row:1,size_x:3,size_y:3,type:visualization),(col:5,id:age_group-vs-breast-cancer-history-with-unknown-values,row:1,size_x:5,size_y:3,type:visualization),(col:1,id:age_menache-vs-breast-cancer-histroy,row:1,size_x:4,size_y:3,type:visualization),(col:1,id:BMI-vs-breast-cancer-history-without-unkown-values,row:4,size_x:6,size_y:3,type:visualization),(col:7,id:race_ethnicity-vs-breast-cancer-history-without-unknown-values,row:4,size_x:6,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:'new%20dashboard%20with%20unknown%20values')&_g=(time:(from:'2015-05-10T23:35:00.000Z',mode:absolute,to:'2015-05-10T23:40:00.000Z'))" height="900" width="1100"></iframe>
+                                <iframe src="http://52.24.173.76:5601/#/dashboard/new-dashboard-with-unknown-values?embed&_a=(filters:!(),panels:!((col:10,id:menopause-vs-breast-cancer-history-pie-chart,row:1,size_x:3,size_y:3,type:visualization),(col:5,id:age_group-vs-breast-cancer-history-with-unknown-values,row:1,size_x:5,size_y:3,type:visualization),(col:1,id:age_menache-vs-breast-cancer-histroy,row:1,size_x:4,size_y:3,type:visualization),(col:1,id:BMI-vs-breast-cancer-history-without-unkown-values,row:4,size_x:6,size_y:3,type:visualization),(col:7,id:race_ethnicity-vs-breast-cancer-history-without-unknown-values,row:4,size_x:6,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:'new%20dashboard%20with%20unknown%20values')&_g=(time:(from:'2015-05-10T23:35:00.000Z',mode:absolute,to:'2015-05-10T23:40:00.000Z'))" height="700" width="1090"></iframe>
                 
                        
                         
