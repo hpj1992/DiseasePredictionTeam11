@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Forms | Forms</title>
+    <title>Prediction | Percent</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,11 +77,11 @@
                     </i><span class="menu-title">Lifestyle Form</span></a>
                       
                     </li>
-                    <li><a href="Tables.html"><i class="fa fa-th-list fa-fw">
+                    <!-- <li><a href="Tables.html"><i class="fa fa-th-list fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">OverAll Prediction</span></a>
                           
-                    </li>
+                    </li> -->
                     <li><a href="Extras.html"><i class="fa fa-user fa-fw">
                         <div class="icon-bg bg-grey"></div>
                     </i><span class="menu-title">Edit Profile</span></a>
@@ -103,8 +103,8 @@
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i
                             class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Forms</li>
+                        <li class="hidden"><a href="#">Prediction</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Prediction</li>
                     </ol>
                     <div class="clearfix">
                     </div>
@@ -121,7 +121,7 @@
                 <!--BEGIN FOOTER-->
                 <div id="footer">
                     <div class="copyright">
-                        2015 Â© Team 11</a></div>
+                        2015 © Team 11</a></div>
                 </div>
                 <!--END FOOTER-->
             </div>

@@ -40,11 +40,11 @@ public class PatientDataDAO {
 		MongoConfig.getMongoOperationsObj().findAndModify(query, update, PatientData.class);
 	
 	}
-	
+
 	public static boolean processPatientData(PatientData patient) {
 		rootFactors.clear();
 
-		if (Integer.valueOf(patient.getAge()) >=4) {
+		if (Integer.valueOf(patient.getAge()) < 4) {
 			rootFactors.add("Age");
 			if (Integer.valueOf(patient.getAgeMenarche()) == 2) {
 				rootFactors.add("Age Menarche");
@@ -52,6 +52,7 @@ public class PatientDataDAO {
 				// 12-13
 				// YES
 			} else {
+				percent=0.0;
 				Double bmi=Double.valueOf(patient.getBMI());
 				if(bmi >= 18.5 && bmi<=24.9){
 					rootFactors.add("BMI");
@@ -62,21 +63,28 @@ public class PatientDataDAO {
 				}
 			}
 		} else {
+			percent=0.0;
 			if(Integer.valueOf(patient.getMenopause())==2){
 				percent=83.0;
 				rootFactors.add("Menopause");
 				//YES
 			}
 			else{
+				percent=0.0;
 				if(Integer.valueOf(patient.getRace())==1){
 					percent=82.0;
 					rootFactors.add("Race");
 					//YES
 				}else{
+					percent=0.0;
 					//NO
 				}
 			}
 
+		}
+		System.out.println("Root factors:"+rootFactors.toArray().toString());
+		for(int i=0;i<rootFactors.size();i++){
+			System.out.println(rootFactors.get(i));
 		}
 		if(rootFactors.size()>0)
 			return true;

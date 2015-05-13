@@ -57,7 +57,39 @@ public class DNAAverageDistanceDAO {
 
 		return output;
 	}
+	public static double getDistanceNormal(DNAAverageDistances distance, DNA newDNA) {
+
+		double aDiff = 14 - newDNA.A;
+		double gDiff = 20 - newDNA.G;
+		double cDiff = 20 - newDNA.C;
+		double tDiff = 14 - newDNA.T;
+
+		double aSqr = Math.pow(aDiff, 2);
+		double gSqr = Math.pow(gDiff, 2);
+		double cSqr = Math.pow(cDiff, 2);
+		double tSqr = Math.pow(tDiff, 2);
+
+		double output = Math.sqrt(aSqr + gSqr + cSqr + tSqr);
+
+		return output;
+	}
 	
+	public static double getDistanceAffected(DNAAverageDistances distance, DNA newDNA) {
+
+		double aDiff = 18 - newDNA.A;
+		double gDiff = 18 - newDNA.G;
+		double cDiff = 19 - newDNA.C;
+		double tDiff = 18 - newDNA.T;
+
+		double aSqr = Math.pow(aDiff, 2);
+		double gSqr = Math.pow(gDiff, 2);
+		double cSqr = Math.pow(cDiff, 2);
+		double tSqr = Math.pow(tDiff, 2);
+
+		double output = Math.sqrt(aSqr + gSqr + cSqr + tSqr);
+
+		return output;
+	}
 	public static boolean getDNACluster(DNA dna){
 		Query query = new Query();
 		query.addCriteria(Criteria.where("geneType").in(
@@ -70,11 +102,13 @@ public class DNAAverageDistanceDAO {
 		DNAAverageDistances affectedDNADistances = (DNAAverageDistances) MongoConfig
 				.getMongoOperationsObj()
 				.findOne(query2, DNAAverageDistances.class);
-		double distanceWithNormal=getDistance(normalDNADistances,dna);
-		double distanceWithAffected=getDistance(affectedDNADistances,dna);
+		double distanceWithNormal=getDistanceNormal(normalDNADistances,dna);
+		double distanceWithAffected=getDistanceAffected(affectedDNADistances,dna);
+		System.out.println("affected:" + distanceWithAffected +"normal:"+ distanceWithNormal);
 		//double percent=0;
-		if(distanceWithAffected<distanceWithNormal){
+		if(distanceWithAffected < distanceWithNormal){
 			percent=1-((distanceWithAffected)/(distanceWithNormal+distanceWithAffected));
+			System.out.println("m here yo");
 			UpdateDNAAverageDistance(affectedDNADistances, dna);
 			return true;
 		}else{

@@ -3,7 +3,7 @@ package com.cmpe239.team11.Model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="DNA")
+@Document(collection="DNA2")
 public class DNA {
 
 

@@ -25,6 +25,7 @@ import com.cmpe239.team11.Model.PatientData;
 import com.cmpe239.team11.Model.UserProfile;
 import com.cmpe239.team11.Utility.ApplicationConstants;
 import com.cmpe239.team11.Utility.LifestyleModel;
+import com.cmpe239.team11.Utility.MongoConfig;
 
 /**
  * Handles requests for the application home page.
@@ -55,7 +56,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-		//DNAAverageDistanceDAO.generateAverageDistance(ApplicationConstants.NORMAL_GENE);
+		DNAAverageDistanceDAO.generateAverageDistance(ApplicationConstants.NORMAL_GENE);
 		//getPredictionFromGene(req,model,"CCCCGCCCCCGCGACAGTCACCCGTTCCCCCGCCCCCGCGACAGTCGCCCGTTCCCCCGGCCCCGCGACA");
 		//GeneModel.uploadFileDataToServer();
 		
@@ -65,7 +66,8 @@ public class HomeController {
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	   public String FirstPage(Model model)
 	   {
-	      model.addAttribute("username", username);	      
+	      model.addAttribute("username", username);	
+	      setRecommendations(model);
 	      return "dashboard";
 	   }
 	
@@ -125,6 +127,13 @@ public class HomeController {
 	      return "Extras";
 	   }
 	
+	@RequestMapping(value = "/weka", method = RequestMethod.GET)
+	   public String WekaPage(Model model)
+	   {
+	     // model.addAttribute("username", username);	      
+	      return "weka";
+	   }
+	
 	@RequestMapping(value = "/notLoggedIn", method = RequestMethod.GET)
 	   public ModelAndView notLoggedInPage()
 	   {
@@ -161,7 +170,8 @@ public class HomeController {
 			session.setAttribute(ApplicationConstants.USER_ID_SESSION,
 					user.getEmail());
 			username = user.getFirstName();
-			setRecommendations(model);
+			//setRecommendations(model);
+			resetRecommendations(model);
 			return "dashboard";
 		}
 	}
@@ -240,7 +250,10 @@ public class HomeController {
 				System.out.println(patient.isHormone());
 				boolean isCancerPossilbe=PatientDataManager.processPatientData(patient);
 				System.out.println(isCancerPossilbe);
+				double percent=PatientDataManager.getPercent();
 				if(isCancerPossilbe){
+					model.addAttribute("yesPercent", percent);
+					model.addAttribute("noPercent", (100 - percent));
 					PatientData curPatient=PatientDataManager.getPatientData(getLoggedInUser(req.getSession()));
 					if(curPatient.isAlchoholConsumption()){
 						isAlchohol="100";
@@ -255,12 +268,16 @@ public class HomeController {
 						isHormone="0";
 					}
 				}
-				double percent=PatientDataManager.getPercent();
+				else{
+					model.addAttribute("yesPercent", (percent));
+					model.addAttribute("noPercent", (100-percent));
+				}
+				
 				System.out.println(percent);
 				bmi = Double.toString(LifestyleModel.idealBMI(Double.valueOf(weight), Double.valueOf(height)));
 				setRecommendations(model);
-				model.addAttribute("yesPercent", percent);
-				model.addAttribute("noPercent", (100 - percent));
+				/*model.addAttribute("yesPercent", percent);
+				model.addAttribute("noPercent", (100 - percent));*/
 				return "percent";
 		}
 	}
@@ -278,17 +295,21 @@ public class HomeController {
 					.getDNAClusterAndUpdateDatabase(dna);
 			double percent = DNAAverageDistanceManager.getPercent() * 100;
 			mammography = Double.toString(percent);
+			System.out.println(isCancerPossible);
 			if (isCancerPossible) {
 				dna.geneType = ApplicationConstants.AFFECTED_GENE;
+				model.addAttribute("yesPercent", percent);
+				model.addAttribute("noPercent", (100 - percent));
 			} else {
 				dna.geneType = ApplicationConstants.NORMAL_GENE;
+				model.addAttribute("yesPercent", (100 - percent));
+				model.addAttribute("noPercent", (percent));
 			}
 			System.out.println(dna.geneType+ " "+isCancerPossible);
-			System.out.println(percent);
+			System.out.println("Mammography:" + mammography);
+			
 			DNAManager.addNewData(dna);
 			setRecommendations(model);
-			model.addAttribute("yesPercent", percent);
-			model.addAttribute("noPercent", (100 - percent));
 			return "percent";
 		}
 	}
@@ -320,5 +341,12 @@ public class HomeController {
 		model.addAttribute("username", username);
 		model.addAttribute("Alcohol", isAlchohol);
 		model.addAttribute("Hormone", isHormone);
+	}
+	public void resetRecommendations(Model model){
+		model.addAttribute("Mammography", "");
+		model.addAttribute("username", username);
+		model.addAttribute("BMI", "");
+		model.addAttribute("Alcohol", "");
+		model.addAttribute("Hormone", "");
 	}
 }

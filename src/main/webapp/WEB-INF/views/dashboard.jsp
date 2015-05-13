@@ -76,11 +76,11 @@
                     </i><span class="menu-title">Lifestyle Form</span></a>
                       
                     </li>
-                    <li><a href="Tables.html"><i class="fa fa-th-list fa-fw">
+                    <!-- <li><a href="Tables.html"><i class="fa fa-th-list fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">OverAll Prediction</span></a>
                           
-                    </li>
+                    </li> -->
                     <li><a href="Extras.html"><i class="fa fa-user fa-fw">
                         <div class="icon-bg bg-grey"></div>
                     </i><span class="menu-title">Edit Profile</span></a>
